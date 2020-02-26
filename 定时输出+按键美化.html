@@ -1,0 +1,121 @@
+<head>
+<title>有标题文档</title>	
+<script>		//写cookies
+//--------------------------------------------
+function setCookie(name,value)
+{
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
+//读取cookies
+function getCookie(name)
+{
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+ 
+    if(arr=document.cookie.match(reg))
+ 
+        return unescape(arr[2]);
+    else
+        return null;
+}
+
+//删除cookies
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null)
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+}
+//使用示例
+
+//如果需要设定自定义过期时间
+//那么把上面的setCookie　函数换成下面两个函数就ok;
+
+
+//程序代码
+/*function setCookie(name,value,time)
+{
+    var strsec = getsec(time);
+    var exp = new Date();
+    exp.setTime(exp.getTime() + strsec*1);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}*/
+function getsec(str)
+{
+   alert(str);
+   var str1=str.substring(1,str.length)*1;
+   var str2=str.substring(0,1);
+   if (str2=="s")
+   {
+        return str1*1000;
+   }
+   else if (str2=="h")
+   {
+       return str1*60*60*1000;
+   }
+   else if (str2=="d")
+   {
+       return str1*24*60*60*1000;
+   }
+}	
+//这是有设定过期时间的使用示例：
+//s20是代表20秒
+//h是指小时，如12小时则是：h12
+//d是天数，30天则：d30
+//-----------------------------------------------------
+	function checkCookie(name){
+		if(getCookie(name) == null || getCookie(name)=="" || getCookie(name)=="null" || typeof(getCookie(name))=="undefined" || getCookie(name)==false || getCookie(name) == undefined){
+		return false;
+		}else{
+			return true;
+		}
+	}
+
+		var s = 0;
+		function cli(){
+			document.getElementById('demo').innerHTML = s;
+			s++;		
+		}
+		function aa(){		
+			setInterval(cli,1);
+		}
+
+		
+	</script>
+		<style>
+		button{
+			width: 150px;/*设置按钮宽度*/
+			height: 40px;/*设置按钮高度*/
+			color:rgb(24,24,24);/*字体颜色*/
+			background-color:rgb(255,255,255);/*按钮背景颜色*/
+			border-radius: 10px;/*让按钮变得圆滑一点*/
+			//border-width: 0;/*消去按钮丑的边框*/
+			margin: 0;
+			outline: none;/*取消轮廓*/
+			font-family: KaiTi;/*字体设置为楷体*/
+			font-size: 17px;/*设置字体大小*/
+			text-align: center;/*字体居中*/
+			cursor: pointer;/*设置鼠标箭头手势*/
+		}
+		button:hover{/*鼠标移动时的颜色变化*/
+			background-color: rgb(208,208,208);
+		}
+		button:click{
+			background-color: rgb(208,208,208);	
+		}
+	</style>
+</head>
+ 
+<body >
+	<button 
+			type="button" onclick="aa()">确认
+	</button>
+	<button type="button"  onclick="document.getElementById('demo').style.visibility='hidden'">隐藏文本 </button>
+	<button type="button"  onclick="document.getElementById('demo').style.visibility='visible'"> 显示文本</button>
+	<p id = "demo"></p>
+</body>
